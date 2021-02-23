@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><title>玩转JS中的堆栈内存及函数底层处理机制</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h3 id="玩转js中的堆栈内存及函数底层处理机制">玩转JS中的堆栈内存及函数底层处理机制</h3>
+
+<h4 id="1js底层运行机制之堆heap栈stack">1.JS底层运行机制之堆(Heap)栈(Stack)</h4>
+
+<ul><li><p>ECStack（Execution [ˌeksɪˈkjuːʃn] Context Stack）和 EC（Execution Context ）</p></li>
+<li><p>GO（Global Object）</p></li>
+<li><p>VO（Varibale Object）</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//example 1</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a={}, b=<span class="hljs-string">'0'</span>, c=<span class="hljs-number">0</span>;  
+</div><div class="hljs-line">a[b]=<span class="hljs-string">'珠峰'</span>;
+</div><div class="hljs-line">a[c]=<span class="hljs-string">'培训'</span>;  
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a[b]);
+</div><div class="hljs-line">​
+</div><div class="hljs-line">---------------------
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//example 2</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a={}, b=<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'1'</span>), c=<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'1'</span>);  
+</div><div class="hljs-line">a[b]=<span class="hljs-string">'珠峰'</span>;
+</div><div class="hljs-line">a[c]=<span class="hljs-string">'培训'</span>;  
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a[b]);
+</div><div class="hljs-line">​
+</div><div class="hljs-line">---------------------
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//example 3</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a={}, b={<span class="hljs-attr">n</span>:<span class="hljs-string">'1'</span>}, c={<span class="hljs-attr">m</span>:<span class="hljs-string">'2'</span>};  
+</div><div class="hljs-line">a[b]=<span class="hljs-string">'珠峰'</span>;
+</div><div class="hljs-line">a[c]=<span class="hljs-string">'培训'</span>;  
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a[b]);
+</div></code></pre>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> a = {<span class="hljs-attr">n</span>: <span class="hljs-number">1</span>};
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> b = a;
+</div><div class="hljs-line">a.x = a = {<span class="hljs-attr">n</span>: <span class="hljs-number">2</span>};
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a.x);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(b);
+</div></code></pre>
+
+
+
+<h4 id="2全面剖析函数的底层处理机制">2.全面剖析函数的底层处理机制</h4>
+
+<ul><li><p>EC（Execution Context ）</p></li>
+<li><p>AO（Active Object）</p></li>
+<li><p>SCOPE</p></li>
+<li><p>SCOPE-CHAIN</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> x = [<span class="hljs-number">12</span>, <span class="hljs-number">23</span>];
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">y</span>) </span>{
+</div><div class="hljs-line">    y[<span class="hljs-number">0</span>] = <span class="hljs-number">100</span>;
+</div><div class="hljs-line">    y = [<span class="hljs-number">100</span>];
+</div><div class="hljs-line">    y[<span class="hljs-number">1</span>] = <span class="hljs-number">200</span>;
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(y);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">fn(x);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+
+<h4 id="3闭包作用域">3.闭包作用域</h4>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> x = <span class="hljs-number">5</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">x</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">y</span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(y + (++x));
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> f = fn(<span class="hljs-number">6</span>);
+</div><div class="hljs-line">f(<span class="hljs-number">7</span>);
+</div><div class="hljs-line">fn(<span class="hljs-number">8</span>)(<span class="hljs-number">9</span>);
+</div><div class="hljs-line">f(<span class="hljs-number">10</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> a=<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    b=<span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">    A=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b</span>)</span>{
+</div><div class="hljs-line">        alert(a+b++);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    alert(a++);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">A(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">A(<span class="hljs-number">2</span>);
+</div></code></pre>
+
+<h4 id="4let-const-var-的区别">4.let / const / var 的区别</h4>
+
+<ul><li><p>变量提升</p></li>
+<li><p>重复声明</p></li>
+<li><p>块级作用域</p></li>
+<li><p>暂时性死区</p></li>
+<li><p>……</p></li>
+</ul></div></body></html>

@@ -1,0 +1,81 @@
+OOP面向对象
+   + javascript
+   + java
+   + php
+   + C# (ASP.NET)
+   + python
+   + ...
+POP面向过程
+   + C
+   + ...
+
+=============
+程序员是被“诅咒”的行业：单身🐶(找对象难)
+   + Can not find object
+   + 找不到对象
+程序员找对象只能靠自己“new”一个
+----
+资深程序员都是“直男癌晚期”
+
+=============
+面向对象编程语言中的三大概念：
++ 对象：泛指
++ 类：对象的细分
++ 实例：某一个类别中具体的事物
+
+=>我们认知自然界中事物：
+  + 分类
+  + 拿出某一类别中具体的实例去做研究
+  + 当前实例具备的一些特征，对于从属于同一个类别中的其他实例也应该具备（当然有些是实例之间独有的，有些是共有的）
+
+==============
+JS本身是面向对象编程的：JS这门语言的创建过程就是按照类和实例来创建的，JS中有很多很多的类
+我们学习JS也应该向认知自然界一样去学习和探索
+
+数组类：Array（内置类）
+  + 每一个数组都是它的实例
+  + 每一个实例都是独立的个体，有自己私有的，也有一些Array提供给每一个实例公共的属性方法
+
+我们平时见到的JS代码基本上都是具体的实例，都有自己所属的类
+「数据类型类：我们见到的数据值都是所属类的一个实例」
+  + Number
+  + String
+  + Boolean
+  + Symbol
+  + BigInt
+  + Object
+    + Object
+    + Array
+    + RegExp
+    + Date
+    + ...
+  + Function
+
+「DOM对象/节点或元素集合/样式对象或者集合等」
+  + HTMLDivElement / HTMLAnchorElement / HTMLUListElement ... 每一种元素对象都有一个自己所属的类
+  + HTMLElement / XMLElement ...
+  + Element / Text / Document...
+  + Node 节点类
+  + EventTarget
+  + HTMLCollection / NodeList  ...
+  + CSSStyleDeclaration
+  + ......
+
+---------------
+学习JS基础知识，尤其是API层面的
+  + 类.prototype：存放的是给当前类的实例调用的公共属性方法
+  + 类.xxx：把其当作对象设定的静态私有属性方法
+  + ...
+
+document.getElementById('xxx')
+   + 获取上下文只能是document?
+   + getElementById是在Document类原型上提供的方法，只有Document它的实例才可以调用(document是它的实例)
+
+[context].getElementsByTagName('*')
+   + Element类的原型上提供getElementsByTagName方法
+   + 每一个元素标签都是Element类的实例
+   + Document的原型上也有这个方法，所以document也可以用
+   + ...
+
+========================
+自定义类：JS没有的，需要自己搞的

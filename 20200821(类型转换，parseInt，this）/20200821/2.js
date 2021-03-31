@@ -30,9 +30,9 @@ let obj = {
     fn: fn
 };
 fn(); //this:window
-obj.fn(); //this:obj */
-
-/* var num = 10;
+obj.fn(); //this:obj
+ */
+var num = 10;
 var obj = {
     num: 20
 };
@@ -48,7 +48,7 @@ obj.fn = (function (num) {
 var fn = obj.fn;
 fn(5);
 obj.fn(10);
-console.log(num, obj.num); */
+console.log(num, obj.num);
 
 
 /* let obj = {

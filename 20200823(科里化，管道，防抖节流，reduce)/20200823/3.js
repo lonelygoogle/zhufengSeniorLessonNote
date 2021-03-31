@@ -3,17 +3,18 @@
  *   + 预处理思想 
  *   + 应用的也是闭包的机制
  */
-/* function fn(...args) {
+/* function fn(a, ...args) {
     // ES6中的剩余运算符: ...args，把传递进来的实参获取到（排除基于其他形参获取的信息）
     console.log(args); //数组集合
     console.log(arguments); //类数组集合
     return function anonymous() {
 
     };
-} */
+}
+ */
 
 // 柯里化函数：第一次执行大函数，形成一个闭包（原因：返回一个小函数），把一些信息存储到闭包中（传递的实参信息或当前闭包中声明的一些私有变量等信息）；等到后面需要把返回的小函数anonymous执行，遇到一些非自己私有变量，则向其上级上下文中中查找（也就是把之前存储在闭包中的信息获取到）；
-/* function fn(...outerArgs) {
+function fn(...outerArgs) {
     // outerArgs存放第一次执行fn传递的实参信息 [1,2]
 
     return function anonymous(...innerArgs) {
@@ -28,7 +29,7 @@
 }
 
 let res = fn(1, 2)(3);
-console.log(res); //=>6  1+2+3 */
+console.log(res); //=>6  1+2+3
 
 /* 
  * reduce：数组中用来迭代遍历每一项的，可以把每一次处理的结果都拿到，在第一次的处理基础上，进行二次处理...直到数组遍历完成
@@ -38,7 +39,8 @@ console.log(res); //=>6  1+2+3 */
  *       //    + 如果传递了[value]值，则第一次执行callback，里面的[result]存储的参数新信息;
  *   }[,value]);同时itme迭代的是数组中的第一项
  */
-/* arr.reduce(function (result, item) {
+/* let arr = [10, 20, 30, 40, 50]
+arr.reduce(function (result, item) {
     console.log(result, item); // result=0 item=10（数组第一项）
 }, 0);
 
@@ -96,16 +98,17 @@ function reduce(arr, callback, init) {
     return result;
 }
 
-let arr = [10, 20, 30, 40, 50];
+// let arr = [10, 20, 30, 40, 50];
 
-let result = reduce(arr, function (result, item, index) {
-    console.log(index);
-    return result + item;
-});
-console.log(result);
+// let result = reduce(arr, function (result, item, index) {
+//     console.log(index);
+//     return result + item;
+// });
+// console.log(result);
 
-result = reduce(arr, function (result, item, index) {
-    console.log(index);
-    return result + item;
-}, 100);
-console.log(result);
+// result = reduce(arr, function (result, item, index) {
+//     console.log(index);
+//     return result + item;
+// }, 100);
+// console.log(result);
+

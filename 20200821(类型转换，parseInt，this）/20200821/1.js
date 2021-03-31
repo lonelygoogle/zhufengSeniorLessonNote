@@ -1,5 +1,7 @@
-// let result = 100 + true + 21.2 + null + undefined + "Tencent" + [] + null + 9 + false;
-// console.log(result); //“NaNTencentnull9false”
+let result = 100 + true + 21.2 + null + undefined + "Tencent" + [] + null + 9 + false;
+console.log(result); //“NaNTencentnull9false”
+// let result = 100 + true + 21.2 + null
+// console.log(result)
 /*
  * A+B
  *   两边中的任何一边遇到字符串或者对象(对象转换为数字要先转换为字符串[排除有原始值的]),都是按照字符串拼接处理的

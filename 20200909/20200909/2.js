@@ -68,7 +68,8 @@ let p2 = p1.then(result => {
 }); */
 
 /* let p1 = new Promise((resolve, reject) => {
-    resolve('OK');
+    console.log('tongbu')
+    resolve('黄思沁');
 });
 p1.then(result => {
     console.log(`成功了 -> ${result}`);

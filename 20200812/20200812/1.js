@@ -1,12 +1,12 @@
 /*
- * 基本数据类型（原始值类型）： 
+ * 基本数据类型（原始值类型）：
  *   + number   NaN/Infinity
  *   + string   单引号/双引号/反引号``
  *   + boolean  true/false
- *   + null     
- *   + undefined 
+ *   + null
+ *   + undefined
  *   + symbol   创建唯一值
- *   + bigint   
+ *   + bigint
  * 引用数据类型:
  *   + object
  *     + {} 普通对象
@@ -54,25 +54,33 @@ if (res === 200) {
  *   + 浏览器（引擎/内核）
  *   + node.js
  *   + webview
- *   + ... 
+ *   + ...
  */
-var a = 12;
-var b = a;
-b = 13;
-console.log(a); //12
+// var a = 12;
+// var b = a;
+// b = 13;
+// console.log(a); //12
 
-var a = {
-    n: 12
-};
-var b = a;
-b.n = 13;
-console.log(a.n); //13
+// var a = {
+//   n: 12,
+// };
+// var b = a;
+// b.n = 13;
+// console.log(a.n); //13
 
-var a = {
-    n: 12
-};
-var b = a;
-b = {
-    n: 13
-};
-console.log(a.n);  //12
+// var a = {
+//   n: 12,
+// };
+// var b = a;
+// b = {
+//   n: 13,
+// };
+// console.log(a.n); //12
+
+const number = 0;
+const string = "string";
+const bool = true;
+console.log(number || string);
+console.log(number && string);
+console.log(bool || number);
+console.log(bool && number);

@@ -38,7 +38,7 @@ console.log('NO'); //2 */
 //   + catch
 //   + finally
 
-// Promise 
+// Promise
 //   + resolve 返回一个状态为成功的Promise实例
 //   + reject 返回一个状态为失败的Promise实例
 //   + all
@@ -53,19 +53,22 @@ console.log('NO'); //2 */
 //     + 特殊情况：如果A/B返回的是一个新的Promise实例，则返回的Promise实例的成功失败以及结果，直接决定p2的状态和结果
 // p1的成功和失败也会受到executor执行是否报错影响，执行报错了，则p1的状态就是失败的，promiseResult的值是失败的原因；如果执行不报错，再看执行的是resolve/reject
 /* let p1 = new Promise((resolve, reject) => {
-    // 管理一个异步操作：根据需求控制promise成功还是失败
-    setTimeout(() => {
-        let ran = Math.random();
-        ran < 0.5 ? reject('NO') : resolve('OK');
-    }, 1000);
+  // 管理一个异步操作：根据需求控制promise成功还是失败
+  setTimeout(() => {
+    let ran = Math.random();
+    ran < 0.5 ? reject("NO") : resolve("OK");
+  }, 1000);
 });
-let p2 = p1.then(result => {
+let p2 = p1.then(
+  (result) => {
     console.log(`成功了 -> ${result}`);
-    return result + '@@';
-}, reason => {
+    return result + "@@";
+  },
+  (reason) => {
     console.log(`失败了 -> ${reason}`);
-    return reason + '@@';
-}); */
+    return reason + "@@";
+  }
+); */
 
 /* let p1 = new Promise((resolve, reject) => {
     console.log('tongbu')
@@ -146,7 +149,7 @@ setTimeout(() => {
     console.log('OK');
 }, 1000); */
 
-// Promise.all管理多个promise实例，返回一个总的promise实例 P 
+// Promise.all管理多个promise实例，返回一个总的promise实例 P
 //   + 当所有实例都为成功，P状态才是成功（结果是一个数组，按照顺序依次存储了每一个实例成功的结果）
 //   + 只要有一个实例失败的，P状态就是失败（结果就是当前实例失败的原因）
 // Promise.all([promise1,promise2,...]).then(result=>{}).catch(reason=>{})
